@@ -1,0 +1,247 @@
+<meteonet>
+	<stations>
+		<station id="vico" db_id="100">
+			<location>Vico del Gargano</location>
+			<coordinates   long="41.88" lat="15.95" />
+			<img_coordinates x="212" y="42" />
+			<webcam_associated>vico</webcam_associated>
+			<visible>true</visible>
+			<info><![CDATA[ La stazione &egrave; una Davis Vantage Pro 2.
+			 ]]> </info>
+
+			<valid_fields>
+				<field>temp</field>
+				<field>rh</field>
+				<field>press</field>
+				<field>wind_speed</field>
+				<field>wind_dir</field>
+				<field>rain</field>
+			</valid_fields>
+			<router use="no" />
+		</station>
+		<station id="sgr" db_id="101">
+			<location>San Giovanni Rotondo</location>
+			<coordinates lat="15.72" long="41.7" />
+			<img_coordinates x="100" y="136" />
+			<webcams_associated>vico</webcams_associated>
+			<visible>true</visible>
+			<info><![CDATA[  Stazione LaCrosse 2305. Consultare www.meteosgr.it per ulteriori informazioni sulla stazione.]]> 
+			 </info>
+			<valid_fields>
+				<field>temp</field>
+				<field>rh</field>
+				<field>press</field>
+				<field>wind_speed</field>
+				<field>wind_dir</field>
+				<field>rain</field>
+			</valid_fields>
+			<router use="yes" type="meteoplug" interval="1">
+				<url>http://sgr.meteogargano.org/anemos/client.txt</url>
+			</router>
+		</station>
+		<station id="foresta" db_id="102">
+			<location>Foresta Umbra</location>
+			<coordinates long="41.82" lat="15.99" />
+			<img_coordinates x="258" y="43" />
+			<webcams_associated>vico</webcams_associated>
+			<visible>true</visible>
+			<info><![CDATA[ La stazione &egrave; ubicata presso la Caserma Forestale 'Foresta Umbra'. La stazione meteorologica &egrave; modello
+				 Davis Vantage Pro2 e non ha anemometro. E' collegata a un sistema composto da un Linksys NSLU2 
+				 (un dispositivo NAS con firmware Debian/Linux, 32 MB di memoria RAM e un processore ARM da 233 Mhz).
+				 Uno script pianificato preleva ogni minuto i dati dalla stazione e li manda al server tramite un modem/router
+				 UMTS Onda oppure li salva temporaneamente in caso di collegamento mancante.]]>
+			 </info>
+			<note><![CDATA[ Novembre-Dicembre 2012: La stazione necessita di sostituzione batteria tampone, motivo per cui in alcuni intervalli di tempo i dati provenienti dalla stazione non sono disponibili ]]> </note>
+			<note><![CDATA[ 2012: I dati pluviometrici sono affetti da errore dovuto a blocco pluviometro per ostruzione nel periodo estate-autunno 2012 ]]> </note>
+		</station>
+		<station id="falcare" db_id="103">
+			<location>Falcare</location>
+			<coordinates long="41.78" lat="15.83" />
+			<img_coordinates x="190" y="23" />
+			<webcams_associated>vico</webcams_associated>
+			<visible>true</visible>
+			<info><![CDATA[ La stazione &egrave; ubicata presso agriturismo falcare ]]>
+			 </info>
+			<note><![CDATA[ Velocit&agrave; del vento e dati da pluviometro sono campi da validare, al momento potrebbero essere non accurati ]]> </note>
+
+
+			<valid_fields>
+				<field>temp</field>
+				<field>rh</field>
+				<field>press</field>
+				<field>rain</field>
+			</valid_fields>
+			<router use="yes" type="raw" interval="1"/>
+		</station>
+		<station id="vieste" db_id="104">
+			<location>Vieste</location>
+			<coordinates long="41.88" lat="16.17" />
+			<img_coordinates x="320" y="-100" />
+			<webcams_associated>vico</webcams_associated>
+			<visible>true</visible>
+			<info><![CDATA[ Stazione ubicata al porto di Vieste, presso la stazione di rifornimento <a href="http://www.garganocarburanti.it/">Gargano Carburanti</a>.  ]]>
+			 </info>
+
+
+			<valid_fields>
+				<field>temp</field>
+				<field>rh</field>
+				<field>press</field>
+				<field>rain</field>
+			</valid_fields>
+			<router use="yes" type="wddailylog" interval="1">
+				<url>http://www.viestemeteolive.com/wdlive/dailylog.txt</url>
+			</router>
+		</station>
+		<station id="chiancate" db_id="105">
+			<location>Chiancate</location>
+			<coordinates long="41.76" lat="15.72" />
+			<img_coordinates x="100" y="-80" />
+			<webcam_associated>vico</webcam_associated>
+			<visible>true</visible>
+			<info><![CDATA[ Presso agriturismo Le Chiancate - Oasi nella natura
+			 ]]> </info>
+
+			<valid_fields>
+				<field>temp</field>
+				<field>rh</field>
+				<field>press</field>
+				<field>wind_speed</field>
+				<field>wind_dir</field>
+				<field>rain</field>
+			</valid_fields>
+			<router use="no" type="meteoplug" interval="1" />
+		</station>
+	</stations>
+
+	<webcams>
+		<webcam id="vico" db_id="101">
+			<visible>true</visible>
+			<location>Vico del Gargano</location>
+			<info><![CDATA[ La webcam consiste in realt&agrave; in una macchina fotografica Canon ed &egrave; gestito dal sistema
+				proprietario 'meteoplug'.]]></info>
+			<router use="no" />
+			<edit use="yes">
+				<crop top="40" left="30" right="30" bottom="40" />
+				<title>Vico del Gargano - Puntamento Nord</title>
+				<meteodata use="yes" station="vico"/>
+			</edit>
+		</webcam>
+		<webcam id="foresta" db_id="102">
+			<visible>true</visible>
+			<location>Foresta Umbra - Casa Forestale</location>
+			<info><![CDATA[ La webcam che manda questi scatti &egrave; una IP-Camera Logitech DCS-2130. La webcam ha un sensore CMOS adatto
+				a ambienti poco illuminati. E' collegata tramite cavo ethernet a un router, tramite cui manda direttamente 
+				le immagini al server tramite protocollo FTP ogni 15 minuti.]]></info>
+			<router use="no" />
+			<edit use="yes">
+				<crop top="0" left="0" right="0" bottom="0" />
+				<title>Foresta Umbra - Puntamento Nord</title>
+				<meteodata use="yes" station="foresta"/>
+			</edit>
+		</webcam>
+		<webcam id="falcare" db_id="103">
+			<visible>true</visible>
+			<location>Falcare</location>
+			<info><![CDATA[ Stiamo lavorando per rendere operativa la webcam. ]]></info>
+			<router use="no" />
+			<edit use="yes">
+				<crop top="0" left="0" right="0" bottom="0" />
+				<title>Falcare - Puntamento Ovest</title>
+				<meteodata use="yes" station="falcare"/>
+			</edit>
+		</webcam>
+		<webcam id="vieste" db_id="104">
+			<visible>true</visible>
+			<location>Vieste Porto</location>
+			<info><![CDATA[  Webcam ubicata al porto di Vieste, presso la stazione di rifornimento <a href="http://www.garganocarburanti.it/">Gargano Carburanti</a>. ]]></info>
+			<edit use="yes">
+				<crop top="0" left="0" right="0" bottom="0" />
+				<title>Vieste Porto - Orientamento WNW - www.garganocarburanti.it</title>
+				<meteodata use="yes" station="vieste"/>
+			</edit>
+		</webcam>
+		<webcam id="vieste2" db_id="109">
+			<visible>true</visible>
+			<location>Vieste Porto - Vista Molo</location>
+			<info><![CDATA[  Webcam ubicata al porto di Vieste, presso la stazione di rifornimento <a href="http://www.garganocarburanti.it/">Gargano Carburanti</a>. ]]></info>
+			<edit use="yes">
+				<crop top="0" left="0" right="0" bottom="0" />
+				<title>Vieste Porto - Orientamento SW -  www.garganocarburanti.it</title>
+				<meteodata use="yes" station="vieste"/>
+			</edit>
+		</webcam>
+
+		<webcam id="sgr2" db_id="107">
+			<visible>true</visible>
+			<location>San Giovanni Rotondo - Vista Santuario</location>
+			<info><![CDATA[  Vista est ]]></info>
+			<router use="no" />
+			<edit use="yes">
+				<crop top="0" left="0" right="0" bottom="0" />
+				<title>San Giovanni Rotondo - Vista santuario - Hotelimmagine.com</title>
+				<meteodata use="yes" station="sgr"/>
+			</edit>
+		</webcam>
+		<webcam id="sgr" db_id="105">
+			<visible>true</visible>
+			<location>San Giovanni Rotondo</location>
+			<info><![CDATA[  Vista est ]]></info>
+			<router use="yes" type="url" interval="10">
+				<url>http://immagine.dyndns.org:8080/snapshot.cgi?chan=0</url>
+			</router>
+			<edit use="yes">
+				<crop top="0" left="0" right="0" bottom="0" />
+				<!--<pixelization left="687" right="960" bottom="734" top="621" />-->
+				<title>San Giovanni Rotondo - Puntamento Est - Hotelimmagine.com</title>
+				<meteodata use="yes" station="sgr"/>
+			</edit>
+		</webcam>
+		<webcam id="chiancate" db_id="106">
+			<visible>true</visible>
+			<location>Chiancate - Coppa del Tesoro - Vista Nord Est</location>
+			<info><![CDATA[  Stazione autonoma ]]></info>
+			<router use="no" />
+			<edit use="yes">
+				<crop top="0" left="0" right="0" bottom="0" />
+				<title>Chiancate - Coppa del Tesoro vista nord est - www.agriturismonelgargano.it</title>
+				<meteodata use="yes" station="chiancate"/>
+			</edit>
+		</webcam>
+		<webcam id="chiancate2" db_id="108">
+			<visible>true</visible>
+			<location>Chiancate - Coppa del Tesoro - Vista Sud</location>
+			<info><![CDATA[  Stazione autonoma ]]></info>
+			<router use="no" />
+			<edit use="yes">
+				<crop top="0" left="0" right="0" bottom="0" />
+				<title>Chiancate - Coppa del Tesoro vista sud - www.agriturismonelgargano.it</title>
+				<meteodata use="yes" station="chiancate"/>
+			</edit>
+		</webcam>
+		<webcam id="borgocelano" db_id="110">
+			<visible>true</visible>
+			<location>Borgo Celano</location>
+			<info><![CDATA[  Stazione autonoma ]]></info>
+			<router use="yes" type="url" interval="10">
+				<url>http://meteopuciacchia.altervista.org/swpi/swpi_camera2.php</url>
+			</router>
+			<edit use="yes">
+				<crop top="0" left="0" right="0" bottom="0" />
+				<title></title>
+				<meteodata use="no" />
+			</edit>
+		</webcam>
+		<webcam id="sanmenaio" db_id="111">
+			<visible>true</visible>
+			<location>San Menaio</location>
+			<info><![CDATA[  Stazione autonoma ]]></info>
+			<router use="no" />
+			<edit use="yes">
+				<crop top="0" left="0" right="0" bottom="0" />
+				<title></title>
+				<meteodata use="no" />
+			</edit>
+		</webcam>
+	</webcams>
+</meteonet>

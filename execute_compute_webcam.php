@@ -1,0 +1,50 @@
+#!/usr/bin/php
+<?php
+/*
+	Meteonet - the backend that manages data from weather stations
+	used by meteogargano.org
+	
+	Copyright (C) 2013-2021 Filippo Gurgoglione (ziofil@gmail.com)
+	All rights reserved.
+	
+	Permission is hereby granted, free of charge, to any person obtaining a 
+	copy of this software and associated documentation files (the "Software"), 
+	to deal in the Software without restriction, including without limitation 
+	the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+	and/or sell copies of the Software, and to permit persons to whom the 
+	Software is furnished to do so, subject to the following conditions:
+	
+	The above copyright notice and this permission notice shall be included 
+	in all copies or substantial portions of the Software.
+	
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS 
+	OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
+	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
+	SOFTWARE.
+*/
+include_once('core.php');
+$net = new meteonet_core();
+$date = getdate(meteonet_utils::utc_time());
+$def_month = $date["mon"];
+$def_day = $date["mday"];
+$def_year = $date["year"];
+
+if ($def_day == 1)
+{
+	if ($def_month == 1)
+		$def_year = $def_year - 1;
+	else
+		$def_month = $def_month - 1;
+} else $def_day = $def_day - 1;
+
+if (isset($_GET['day'])) $day = $_GET['day']; else $day = $def_day;
+if (isset($_GET['month'])) $month = $_GET['month']; else $month = $def_month;
+if (isset($_GET['year'])) $day = $_GET['year']; else $year = $def_year;
+
+echo 'day='.$day.' month='.$month.' year='.$year."\n";
+
+$net->compute_db_webcam($year,$month,$day);
+?>
