@@ -119,7 +119,7 @@
 			if ($output) {
 				//$this->log("Output from meteoplug:" . $output);
 				$lines =  explode("\n",$output);;
-				$pieces = explode("|",$lines[1]);
+				$pieces = explode("|",$lines[0]);
 				$t=$pieces[2];
 				$ret = array();
 				$hour = substr($t,0,2); $min = substr($t,3,2); $day=substr($t,10,2); 
