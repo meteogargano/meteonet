@@ -36,7 +36,7 @@
 				<field>rain</field>
 			</valid_fields>
 			<router use="yes" type="meteoplug" interval="1">
-				<url>http://sgr.meteogargano.org/anemos/client.txt</url>
+				<url>http://sgr.meteogargano.org/dati/client.txt</url>
 			</router>
 		</station>
 		<station id="foresta" db_id="102">
