@@ -101,6 +101,8 @@ class meteonet_interface {
 				$my = array (
 					'pos_x'=>(string)$station->img_coordinates['x'],
 					'pos_y'=>(string)$station->img_coordinates['y'],
+					'gps_long'=>(string)$station->coordinates['long'],
+					'gps_lat'=>(string)$station->coordinates['lat'],					
 					'location'=>(string)$station->location,
 					'info'=>(string)$station->info,
 					'notes'=>$notes);
