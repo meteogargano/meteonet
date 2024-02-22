@@ -112,6 +112,158 @@
 			</valid_fields>
 			<router use="no" type="meteoplug" interval="1" />
 		</station>
+		<station id="sanmenaio" db_id="106">
+			<location>San Menaio</location>
+			<coordinates long="41.93" lat="15.94" />
+			<img_coordinates x="195" y="276" />
+			<webcams_associated>vico</webcams_associated>
+			<visible>true</visible>
+			<info><![CDATA[ La stazione &egrave; ubicata presso san menaio ]]>
+			 </info>
+			<note><![CDATA[ ]]> </note>
+
+
+			<valid_fields>
+				<field>temp</field>
+				<field>rh</field>
+				<field>press</field>
+				<field>rain</field>
+			</valid_fields>
+			<router use="yes" type="raw" interval="1"/>
+		</station>
+		<station id="borgocelano" db_id="107">
+			<location>Borgo Celano</location>
+			<coordinates long="41.71" lat="15.64" />
+			<img_coordinates x="90" y="133" />
+			<webcams_associated>sanmatteo</webcams_associated>
+			<visible>true</visible>
+			<info><![CDATA[ La stazione &egrave; ubicata presso borgo celano ]]>
+			 </info>
+			<note><![CDATA[ ]]> </note>
+
+
+			<valid_fields>
+				<field>temp</field>
+				<field>rh</field>
+				<field>press</field>
+				<field>rain</field>
+			</valid_fields>
+			<router use="yes" type="raw" interval="1"/>
+		</station>
+		<station id="foggia" db_id="108">
+			<location>Foggia</location>
+			<coordinates long="41.5" lat="15.4" />
+			<img_coordinates x="90" y="133" />
+			<webcams_associated>sanmatteo</webcams_associated>
+			<visible>true</visible>
+			<info><![CDATA[ La stazione &egrave; ubicata presso foggia ]]>
+			 </info>
+			<note><![CDATA[ ]]> </note>
+
+
+			<valid_fields>
+				<field>temp</field>
+				<field>rh</field>
+				<field>press</field>
+				<field>rain</field>
+			</valid_fields>
+			<router use="yes" type="raw" interval="1"/>
+		</station>
+		<station id="luceramd" db_id="109">
+			<location>Lucera - Monti Dauni</location>
+			<coordinates long="41.55" lat="15.3" />
+			<img_coordinates x="90" y="133" />
+			<webcams_associated>sanmatteo</webcams_associated>
+			<visible>true</visible>
+			<info><![CDATA[ La stazione &egrave; ubicata presso lucera monti dauni ]]>
+			 </info>
+			<note><![CDATA[ ]]> </note>
+
+
+			<valid_fields>
+				<field>temp</field>
+				<field>rh</field>
+				<field>press</field>
+				<field>rain</field>
+			</valid_fields>
+			<router use="yes" type="raw" interval="1"/>
+		</station>
+		<station id="luceralm" db_id="110">
+			<location>Lucera - Piana Marchesa</location>
+			<coordinates long="41.6" lat="15.3" />
+			<img_coordinates x="90" y="133" />
+			<webcams_associated>sanmatteo</webcams_associated>
+			<visible>true</visible>
+			<info><![CDATA[ La stazione &egrave; ubicata presso lucera piana marchesa ]]>
+			 </info>
+			<note><![CDATA[ ]]> </note>
+
+
+			<valid_fields>
+				<field>temp</field>
+				<field>rh</field>
+				<field>press</field>
+				<field>rain</field>
+			</valid_fields>
+			<router use="yes" type="raw" interval="1"/>
+		</station>
+		<station id="vicodelgargano2" db_id="111">
+			<location>Vico del Gargano 2</location>
+			<coordinates long="41.88" lat="15.84" />
+			<img_coordinates x="90" y="133" />
+			<webcams_associated>sanmatteo</webcams_associated>
+			<visible>true</visible>
+			<info><![CDATA[ La stazione &egrave; ubicata presso vico del gargano2 ]]>
+			 </info>
+			<note><![CDATA[ ]]> </note>
+
+
+			<valid_fields>
+				<field>temp</field>
+				<field>rh</field>
+				<field>press</field>
+				<field>rain</field>
+			</valid_fields>
+			<router use="yes" type="raw" interval="1"/>
+		</station>
+		<station id="peschici" db_id="112">
+			<location>Peschici - I.C. Libetta</location>
+			<coordinates long="41.97" lat="16.01" />
+			<img_coordinates x="90" y="133" />
+			<webcams_associated>sanmatteo</webcams_associated>
+			<visible>true</visible>
+			<info><![CDATA[ La stazione &egrave; ubicata presso vico del gargano2 ]]>
+			 </info>
+			<note><![CDATA[ ]]> </note>
+
+
+			<valid_fields>
+				<field>temp</field>
+				<field>rh</field>
+				<field>press</field>
+				<field>rain</field>
+			</valid_fields>
+			<router use="yes" type="raw" interval="1"/>
+		</station>
+		<station id="sannicandro" db_id="113">
+			<location>San Nicandro Garganico</location>
+			<coordinates long="41.83" lat="15.56" />
+			<img_coordinates x="90" y="133" />
+			<webcams_associated>sanmatteo</webcams_associated>
+			<visible>true</visible>
+			<info><![CDATA[ La stazione &egrave; ubicata presso vico del gargano2 ]]>
+			 </info>
+			<note><![CDATA[ ]]> </note>
+
+
+			<valid_fields>
+				<field>temp</field>
+				<field>rh</field>
+				<field>press</field>
+				<field>rain</field>
+			</valid_fields>
+			<router use="yes" type="raw" interval="1"/>
+		</station>
 	</stations>
 
 	<webcams>
