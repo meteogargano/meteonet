@@ -27,7 +27,7 @@
 	class meteonet_utils {
 		static $timezone = null;
 
-		function utc_time($time=NULL) 
+		static function utc_time($time=NULL) 
 		{
 			$old = date_default_timezone_get(); 
 			date_default_timezone_set('UTC');
@@ -40,7 +40,7 @@
 			return $ret;
 		}
 
-		function local_time($time)
+		static function local_time($time)
 		{
 			if (self::$timezone == null)
 			{ 
@@ -51,7 +51,7 @@
 			return $time+self::$timezone;
 		}
 
-		function get_basetime($time,$period) //period=minute|hour|day
+		static function get_basetime($time,$period) //period=minute|hour|day
 		{
 			switch ($period) {
 				case 'minute': $intval = 300; break;
@@ -62,7 +62,7 @@
   			return ($time-fmod($time,$intval)); //1352160000
 		}
 
-		function get_days_month($month)
+		static function get_days_month($month)
 		{
 			if ($month==2) { 
 				if ($year % 4 == 0 && ($year % 100 != 0 || $year % 400 == 0)) // leap year?
@@ -76,7 +76,7 @@
 			return $days;
 		}
 
-		function parse_file($filename) 
+		static function parse_file($filename) 
 		{
 			$arr = array();
 			$lines = file($filename);
@@ -120,7 +120,7 @@
 			return $arr;
 		}
 
-		function create_meteo_string($array)
+		static function create_meteo_string($array)
 		{
 			$str = "";
 			foreach ($array as $ret) {
@@ -130,7 +130,7 @@
 			}
 		}
 
-		function sql_insert1($station_id,$array_values)
+		static function sql_insert1($station_id,$array_values)
 		{
 			$sql = "INSERT INTO data (station_id,timestamp,temp,".
 				"rh,press,wind_speed,wind_gust,wind_dir,rain_year,dewpoint,windchill) VALUES (".
@@ -148,7 +148,7 @@
 			return $sql;
 		}
 
-		function sql_insert2($station_id,$table,$array_values)
+		static function sql_insert2($station_id,$table,$array_values)
 		{
 			// $table = min|day
 			$sql = "INSERT INTO data_$table (station_id,timestamp,temp,temp_min,temp_max,".
@@ -179,7 +179,7 @@
 			return $sql;		
 		}
 
-		function literal2deg($winddir)
+		static function literal2deg($winddir)
 		{
 			switch ($winddir) {
 				case "E": $windd=90; break;
@@ -201,7 +201,7 @@
 			}
 			return $windd;
 		}
-		function deg2literal($winddir) //TODO migliorare
+		static function deg2literal($winddir) //TODO migliorare
 		{
 			if ($winddir>=0 && $winddir<22)	$windd = "N"; 
 			elseif ($winddir>=22 && $winddir<45)	$windd = "NNE"; 
@@ -223,7 +223,7 @@
 			return $windd;
 		}
 
-		function compute_fields($array,$basetime,$init=NULL)
+		static function compute_fields($array,$basetime,$init=NULL)
 		{
 			if (isset($init)) {
 			  // nel caso in cui il vettore init proviene dalla tabella data e non da data_min/data_day
@@ -328,7 +328,7 @@
 			return $ris;
 		}
 
-		function load_jpg($filename)
+		static function load_jpg($filename)
 		{
 			$jpgdata = file_get_contents($filename);
 		// http://stackoverflow.com/questions/1459882/check-manually-for-jpeg-end-of-file-marker-ffd9-in-php-to-catch-truncation-e
@@ -338,7 +338,7 @@
 			return $jpgdata;
 		}
 
-		function log($txt,$file=NULL)
+		static function log($txt,$file=NULL)
 		{
 			$data = date(DATE_RFC822) . ": " . $txt . "\n";
 			if (!isset($file)) echo $data; 
@@ -346,7 +346,7 @@
 			    file_put_contents($file ,$data,FILE_APPEND);
 		}
 
-		function resize_image($img_src)
+		static function resize_image($img_src)
 		{
 			define('THUMBNAIL_IMAGE_MAX_WIDTH', 600);
 			define('THUMBNAIL_IMAGE_MAX_HEIGHT', 600);
@@ -374,7 +374,7 @@
     			return file_get_contents($img_src);
 		}
 
-		function img_text($text,$x,$y,$img,$color,$color_shadow=NULL)
+		static function img_text($text,$x,$y,$img,$color,$color_shadow=NULL)
 		{
 			define('FONT','ARIALN.TTF');
 			define('FONT_SIZE',17);
@@ -387,7 +387,7 @@
 
 		}
 
-		function pixelizate($img,$width,$height)
+		static function pixelizate($img,$width,$height)
 		{
 			$newImg = imagecreatetruecolor($width,$height);
 			imagecopyresized($newImg,$img,0,0,0,0,round($width / 10),round($height / 10),$width,$height);
@@ -397,7 +397,7 @@
 			imagedestroy($newImg);
 		}
 
-		function process_image($img_file,$webcam,$timestamp,$meteo_str)
+		static function process_image($img_file,$webcam,$timestamp,$meteo_str)
 		{
 			date_default_timezone_set('Europe/Rome');
 			define('TEXTROW_HEIGHT', 30);
@@ -453,7 +453,7 @@
 		}
 
 
-		function compute_statistics($array_values,$old_statistics)
+		static function compute_statistics($array_values,$old_statistics)
 		{
 			// controlla se il giorno è lo stesso, altrimenti resetta
 			$ret = array();

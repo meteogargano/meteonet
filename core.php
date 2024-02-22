@@ -32,7 +32,7 @@ include_once('utils.php');
 class meteonet_core {
 		var $net_config;
 		var $db;
-		function meteonet_core()
+		function __construct()
 		{			
 			$this->net_config = simplexml_load_file (dirname(__FILE__) . '/config_net.xml');
 			if (METEONET_ROLE == "server") {
@@ -44,16 +44,16 @@ class meteonet_core {
 		private function db_query($sql) {
 			if (!isset($this->db))
 			{
-				$this->db = mysql_connect(
+				$this->db = mysqli_connect(
 				        METEONET_DB_HOST, METEONET_DB_USER, METEONET_DB_PASSWORD)
-					    or err("Connessione non riuscita: " . mysql_error(),true);
-				mysql_select_db  (METEONET_DB_NAME,$this->db);
+					    or err("Connessione non riuscita: " . mysqli_error(),true);
+				mysqli_select_db  ($this->db, METEONET_DB_NAME);
 			}
 
-			if ($ret = mysql_query($sql,$this->db))
+			if ($ret = mysqli_query($this->db, $sql))
 				return $ret;
 			 else
-				$this->log("Mysql query error: query:'".$sql."'; error:'".mysql_error($this->db)."'");
+				$this->log("Mysql query error: query:'".$sql."'; error:'".mysqli_error($this->db)."'");
 			return false;
 			
 		}
@@ -93,7 +93,7 @@ class meteonet_core {
 			$sql = "SELECT * FROM data WHERE station_id=$db_id AND $cond";
 			$res = $this->db_query($sql);
 			$rows = array();
-			while($row=mysql_fetch_array($res,MYSQL_ASSOC)) {
+			while($row=mysqli_fetch_array($res,MYSQLI_ASSOC)) {
 				$rows[] = $row;
 			}
 
@@ -124,7 +124,7 @@ class meteonet_core {
 			$sql = "SELECT * FROM $table_name WHERE station_id=$db_id AND timestamp<$interval2 AND timestamp>=$interval1";
 			$res = $this->db_query($sql);
 			$rows = array();
-			while($row=mysql_fetch_array($res,MYSQL_ASSOC)) {
+			while($row=mysqli_fetch_array($res,MYSQL_ASSOC)) {
 				$rows[] = $row;
 			}
 			
@@ -138,13 +138,13 @@ class meteonet_core {
 			$sql = "SELECT * FROM data WHERE station_id=$station_db_id AND timestamp<$interval2 AND timestamp>=$interval1";
 			$res = $this->db_query($sql);
 			$rows = array();
-			while($row=mysql_fetch_array($res,MYSQL_ASSOC)) {
+			while($row=mysqli_fetch_array($res,MYSQL_ASSOC)) {
 				$rows[] = $row;
 			}
 			if (count($rows)==0) {
 				$sql = "SELECT * FROM data_min WHERE station_id=$station_db_id AND timestamp<$interval2 AND timestamp>=$interval1";
 				$res = $this->db_query($sql);
-				while($row=mysql_fetch_array($res,MYSQL_ASSOC)) {
+				while($row=mysqli_fetch_array($res,MYSQL_ASSOC)) {
 					$rows[] = $row;
 				}
 			}
@@ -166,7 +166,7 @@ class meteonet_core {
 			$sql = "SELECT `timestamp` FROM $table_name WHERE webcam_id=$db_id AND timestamp<$interval2 AND timestamp>=$interval1";
 			$res = $this->db_query($sql);
 			$rows = array();
-			while($row=mysql_fetch_array($res,MYSQL_ASSOC)) {
+			while($row=mysqli_fetch_array($res,MYSQL_ASSOC)) {
 				$rows[] = $row;
 			}
 			return $rows;
@@ -193,8 +193,8 @@ class meteonet_core {
 					$db_id = (string)$webcam['db_id'];
 					$sql = "SELECT data FROM webcam WHERE timestamp=".$timestamp." AND webcam_id=".$db_id;
 					$res=$this->db_query($sql);
-					$row=mysql_fetch_array($res,MYSQL_ASSOC);
-					mysql_free_result($res);
+					$row=mysqli_fetch_array($res,MYSQL_ASSOC);
+					mysqli_free_result($res);
 					$data = $row['data'];
 					unset($row);
 				}
@@ -242,7 +242,7 @@ class meteonet_core {
 				$db_id = (string)$webcam['db_id'];
 				$sql = "SELECT timestamp FROM webcam WHERE webcam_id = ".$db_id ." ORDER BY timestamp DESC LIMIT 0,1";
 				$res=$this->db_query($sql);
-				$row=mysql_fetch_array($res,MYSQL_ASSOC);
+				$row=mysqli_fetch_array($res,MYSQL_ASSOC);
 				return $row['timestamp'];
 			}
 		}
@@ -257,7 +257,7 @@ class meteonet_core {
 				$db_id = (string)$station['db_id'];
 				$sql = "SELECT * FROM data WHERE station_id = ".$db_id ." ORDER BY timestamp DESC LIMIT 0,1";
 				$res=$this->db_query($sql);
-				$row=mysql_fetch_array($res,MYSQL_ASSOC);
+				$row=mysqli_fetch_array($res,MYSQL_ASSOC);
 				return $row;
 			}
 		}
@@ -339,7 +339,7 @@ class meteonet_core {
 					$sql = "SELECT timestamp FROM $table_name WHERE timestamp<$interval2 AND timestamp>=$interval1 " .
 						"AND $column_name=$db_id LIMIT 0,1";
 					$res = $this->db_query($sql);
-					$num_rows = mysql_num_rows($res);
+					$num_rows = mysqli_num_rows($res);
 					if ($num_rows > 0)
 						$years[] = $i;
 				}
@@ -356,7 +356,7 @@ class meteonet_core {
 					$sql = "SELECT timestamp FROM $table_name WHERE timestamp<$interval2 AND timestamp>=$interval1 " .
 						"AND $column_name=$db_id LIMIT 0,1";
 					$res = $this->db_query($sql);
-					$num_rows = mysql_num_rows($res);
+					$num_rows = mysqli_num_rows($res);
 					if ($num_rows > 0)
 						$months_records[$i] = true;
 					  else
@@ -371,7 +371,7 @@ class meteonet_core {
 				"$column_name=$db_id AND timestamp<$interval2 AND timestamp>=$interval1";
 				$res = $this->db_query($sql); 
 				$return = array();
-				while($row = mysql_fetch_array($res,MYSQL_ASSOC)) {
+				while($row = mysqli_fetch_array($res,MYSQL_ASSOC)) {
 					$day_timestamp = $row['day'];
 					$day = ($day_timestamp  - $interval1) / 86400 + 1;
 					$return[$day] = true;
@@ -388,7 +388,7 @@ class meteonet_core {
 				"$column_name=$db_id AND timestamp<$interval2 AND timestamp>=$interval1";
 				$res = $this->db_query($sql); 
 				$return = array();
-				while($row = mysql_fetch_array($res,MYSQL_ASSOC)) {
+				while($row = mysqli_fetch_array($res,MYSQL_ASSOC)) {
 					$hour_timestamp = $row['hour'];
 					$hour = ($hour_timestamp  - $interval1) / 3600 + 1;
 					$return[$hour] = true;
@@ -569,7 +569,7 @@ class meteonet_core {
 			$sql_check = "SELECT * FROM data_$table WHERE `station_id`=$station_id AND `timestamp`=$basetime LIMIT 0,1";
 			if (!$result=$this->db_query($sql_check))
 				$this->log("commit_compute_db: query error");
-			$num_rows = mysql_num_rows($result);
+			$num_rows = mysqli_num_rows($result);
 			if ($num_rows<1) {
 				$array_values = meteonet_utils::compute_fields($array,$basetime);
 				$sql = "INSERT INTO data_$table (station_id,timestamp,temp,temp_min,temp_max,".
@@ -600,7 +600,7 @@ class meteonet_core {
 				if (!$this->db_query($sql))
 					$this->log("commit_compute_db_meteo: query error");
 			 } else {
-				$init_row = mysql_fetch_row($result);
+				$init_row = mysqli_fetch_row($result);
 				if (!is_null($init_row['n'])) {
 				$array_values = meteonet_utils::compute_fields($array,$basetime,$init_row);
 				$sql = "UPDATE data_$table SET station_id=$station_id, ".
@@ -648,10 +648,10 @@ class meteonet_core {
 						"AND timestamp<$now_basetime ORDER BY timestamp ASC LIMIT 0,1";
 					$res = $this->db_query($sql);
 
-					if (mysql_num_rows($res)<1)
+					if (mysqli_num_rows($res)<1)
 						break;
 
-					$row = mysql_fetch_row($res); $time = $row[0];
+					$row = mysqli_fetch_row($res); $time = $row[0];
 					$day_basetime = meteonet_utils::get_basetime($time,'day');
 					$this->log("compute_db_meteo: computing day basetime ".date("jS \of F Y h:i:s A",meteonet_utils::local_time($day_basetime)));
 					$day_basetime2 = $day_basetime + 86400;
@@ -662,10 +662,10 @@ class meteonet_core {
 					$return = array(); $day_return = array();
 
 					$first = true; $rows = array();
-					while($row=mysql_fetch_array($res,MYSQL_ASSOC)) {
+					while($row=mysqli_fetch_array($res,MYSQL_ASSOC)) {
 						$rows[] = $row;
 					}
-					mysql_free_result($res);
+					mysqli_free_result($res);
 					foreach ($rows as $row) {
 						$mytime = $row['timestamp'];
 						if ($first) { 
@@ -730,11 +730,11 @@ class meteonet_core {
 				$res = $this->db_query($sql);
 
 				$rows = array();
-				while($row=mysql_fetch_array($res,MYSQL_ASSOC)) {
+				while($row=mysqli_fetch_array($res,MYSQL_ASSOC)) {
 					$rows[] = $row;
 				}
 
-				mysql_free_result($res);
+				mysqli_free_result($res);
 
 				// aggregate shots in array of hours
 				foreach ($rows as $row)

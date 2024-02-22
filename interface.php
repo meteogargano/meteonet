@@ -26,8 +26,8 @@
 */
 class meteonet_interface {
 	var $net;
-	function meteonet_interface() {
-		include (dirname(__FILE__) . '/config.php');
+	function __construct() {
+		//include (dirname(__FILE__) . '/config.php');
 		$this->net = new meteonet_core();
 	}
         
